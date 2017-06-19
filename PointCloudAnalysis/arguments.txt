@@ -1,0 +1,7 @@
+ --data_root_path=D:/Projects/PointCloudAnalysis/Data/shape2pose/
+ --label_info_path=data/0_body/coseg_chairs/
+ --mesh_path=data/1_input/coseg_chairs/off/
+ --sample_path=data/2_analysis/coseg_chairs/points/even1000/
+ --dense_sample_path=data/2_analysis/coseg_chairs/points/random100000/
+ --mesh_label_path=data/1_input/coseg_chairs/gt/
+ --sample_label_path=data/4_experiments/exp1_coseg_chairs/1_prediction/

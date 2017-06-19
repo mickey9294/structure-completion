@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_OPENGL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5UiToolsd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_OPENGL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;_DEBUG;_CONSOLE;_LIB;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libraries\Eigen\include\eigen3;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools;D:\Libraries\gflags-master\vc140\Include;D:\Libraries\ANN\ann_vc140\include;D:\Libraries\OpenMesh\OpenMesh 6.3\include;D:\Libraries\freeglut\vc140\include;D:\Libraries\Boost\vc140\include\boost-1_61;D:\Libraries\Ipopt\Ipopt\vc140\include\coin;..\MRFSolver\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\lib;D:\Libraries\gflags-master\build_vc140\lib\Debug;D:\Libraries\OpenMesh\OpenMesh 6.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5UiToolsd.lib;Qt5Widgetsd.lib;D:\Libraries\gflags-master\build_vc140\lib\Debug\gflags_d.lib;D:\Libraries\gflags-master\build_vc140\lib\Debug\gflags_nothreads_d.lib;D:\Libraries\gflags-master\build_vc140\lib\Debug\gflags_nothreads_static_d.lib;D:\Libraries\gflags-master\build_vc140\lib\Debug\gflags_static_d.lib;D:\Libraries\ANN\ann_vc140\MS_Win32\dll\Debug\ANN.lib;OpenMeshCored.lib;OpenMeshToolsd.lib;D:\Libraries\freeglut\vc140\lib\freeglutd.lib;D:\Libraries\freeglut\vc140\lib\freeglut_staticd.lib;D:\Libraries\Ipopt\Ipopt\vc140\lib\Debug\IpOptFSS.lib;D:\Libraries\Ipopt\Ipopt\vc140\lib\Debug\Ipopt-vc8.lib;..\MRFSolver\lib\Debug\MRFSolver_vc140.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_OPENGL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5UiTools.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_OPENGL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include;.\GeneratedFiles\$(ConfigurationName);D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools;D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets;D:\Libraries\Eigen\include\eigen3;D:\Libraries\gflags-master\vc140\Include;D:\Libraries\ANN\ann_vc140\include;D:\Libraries\OpenMesh\OpenMesh 6.3\include;D:\Libraries\freeglut\vc140\include;D:\Libraries\Boost\vc140\include\boost-1_61;D:\Libraries\Ipopt\Ipopt\vc140\include\coin;..\MRFSolver\include;D:\Libraries\Ipopt\Ipopt-master\Ipopt\src\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>D:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\lib;D:\Libraries\OpenMesh\OpenMesh 6.3\lib;D:\Libraries\gflags-master\build_vc140\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5UiTools.lib;Qt5Widgets.lib;gflags.lib;gflags_nothreads.lib;gflags_nothreads_static.lib;gflags_static.lib;D:\Libraries\ANN\ann_vc140\MS_Win32\dll\Release\ANN.lib;OpenMeshCore.lib;OpenMeshTools.lib;D:\Libraries\freeglut\vc140\lib\freeglut_static.lib;D:\Libraries\freeglut\vc140\lib\freeglut.lib;D:\Libraries\Ipopt\Ipopt\vc140\lib\Release\Ipopt-vc8.lib;D:\Libraries\Ipopt\Ipopt\vc140\lib\Release\IpOptFSS.lib;..\MRFSolver\lib\Release\MRFSolver_vc140.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="EigenQP.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_meshviewerwidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QGLViewerWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_meshviewerwidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_meshviewerwidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QGLViewerWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GLViewerCore.cpp" />
+    <ClCompile Include="ICP.cpp" />
+    <ClCompile Include="IPOPTSolver.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeshCuboid.cpp" />
+    <ClCompile Include="MeshCuboidEvaluator.cpp" />
+    <ClCompile Include="MeshCuboidFusion.cpp" />
+    <ClCompile Include="MeshCuboidNonLinearSolver.cpp" />
+    <ClCompile Include="MeshCuboidParameters.cpp" />
+    <ClCompile Include="MeshCuboidPartAssembly.cpp" />
+    <ClCompile Include="MeshCuboidPredictor.cpp" />
+    <ClCompile Include="MeshCuboidReconstruction.cpp" />
+    <ClCompile Include="MeshCuboidRelation.cpp" />
+    <ClCompile Include="MeshCuboidSolver.cpp" />
+    <ClCompile Include="MeshCuboidStructure.cpp" />
+    <ClCompile Include="MeshCuboidSymmetryGroup.cpp" />
+    <ClCompile Include="MeshCuboidTrainer.cpp" />
+    <ClCompile Include="MeshViewerCore.cpp" />
+    <ClCompile Include="MeshViewerCoreT.cpp" />
+    <ClCompile Include="meshviewerwidget.cpp" />
+    <ClCompile Include="MyMesh.cpp" />
+    <ClCompile Include="NLPEigenQuadFunction.cpp" />
+    <ClCompile Include="NLPExpression.cpp" />
+    <ClCompile Include="NLPFormulation.cpp" />
+    <ClCompile Include="NLPVectorExpression.cpp" />
+    <ClCompile Include="QGLViewerWidget.cpp" />
+    <ClCompile Include="RunExperiments.cpp" />
+    <ClCompile Include="RunTest.cpp" />
+    <ClCompile Include="simplerandom.c" />
+    <ClCompile Include="SymmetryDetection.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="meshviewerwidget.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing meshviewerwidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtUiTools" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing meshviewerwidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -D_DEBUG -D_CONSOLE -D_LIB -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS  "-ID:\Libraries\Eigen\include\eigen3" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools" "-ID:\Libraries\gflags-master\vc140\Include" "-ID:\Libraries\ANN\ann_vc140\include" "-ID:\Libraries\OpenMesh\OpenMesh 6.3\include" "-ID:\Libraries\freeglut\vc140\include" "-ID:\Libraries\Boost\vc140\include\boost-1_61" "-ID:\Libraries\Ipopt\Ipopt\vc140\include\coin" "-I.\..\MRFSolver\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing meshviewerwidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtUiTools" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing meshviewerwidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -D_CRT_SECURE_NO_WARNINGS -D_USE_MATH_DEFINES  "-I.\GeneratedFiles" "-I." "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets" "-ID:\Libraries\Eigen\include\eigen3" "-ID:\Libraries\gflags-master\vc140\Include" "-ID:\Libraries\ANN\ann_vc140\include" "-ID:\Libraries\OpenMesh\OpenMesh 6.3\include" "-ID:\Libraries\freeglut\vc140\include" "-ID:\Libraries\Boost\vc140\include\boost-1_61" "-ID:\Libraries\Ipopt\Ipopt\vc140\include\coin" "-I.\..\MRFSolver\include" "-ID:\Libraries\Ipopt\Ipopt-master\Ipopt\src\Common"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="meshviewerwidget.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EigenQP.h" />
+    <ClInclude Include="GeneratedFiles\ui_meshviewerwidget.h" />
+    <ClInclude Include="glut_geometry.h" />
+    <ClInclude Include="GLViewerCore.h" />
+    <ClInclude Include="ICP.h" />
+    <ClInclude Include="IPOPTSolver.h" />
+    <ClInclude Include="MeshCuboid.h" />
+    <ClInclude Include="MeshCuboidEvaluator.h" />
+    <ClInclude Include="MeshCuboidFusion.h" />
+    <ClInclude Include="MeshCuboidNonLinearSolver.h" />
+    <ClInclude Include="MeshCuboidParameters.h" />
+    <ClInclude Include="MeshCuboidPredictor.h" />
+    <ClInclude Include="MeshCuboidRelation.h" />
+    <ClInclude Include="MeshCuboidSolver.h" />
+    <ClInclude Include="MeshCuboidStructure.h" />
+    <ClInclude Include="MeshCuboidSymmetryGroup.h" />
+    <ClInclude Include="MeshCuboidTrainer.h" />
+    <ClInclude Include="MeshViewerCore.h" />
+    <ClInclude Include="MeshViewerCoreT.h" />
+    <ClInclude Include="MyMesh.h" />
+    <ClInclude Include="NLPEigenQuadFunction.h" />
+    <ClInclude Include="NLPExpression.h" />
+    <ClInclude Include="NLPFormulation.h" />
+    <ClInclude Include="NLPVectorExpression.h" />
+    <ClInclude Include="simplerandom.h" />
+    <ClInclude Include="SymmetryDetection.h" />
+    <ClInclude Include="Utilities.h" />
+    <CustomBuild Include="QGLViewerWidget.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QGLViewerWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtUiTools" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing QGLViewerWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -D_DEBUG -D_CONSOLE -D_LIB -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS  "-ID:\Libraries\Eigen\include\eigen3" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools" "-ID:\Libraries\gflags-master\vc140\Include" "-ID:\Libraries\ANN\ann_vc140\include" "-ID:\Libraries\OpenMesh\OpenMesh 6.3\include" "-ID:\Libraries\freeglut\vc140\include" "-ID:\Libraries\Boost\vc140\include\boost-1_61" "-ID:\Libraries\Ipopt\Ipopt\vc140\include\coin" "-I.\..\MRFSolver\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QGLViewerWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtUiTools" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing QGLViewerWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_UITOOLS_LIB -DQT_WIDGETS_LIB -D_CRT_SECURE_NO_WARNINGS -D_USE_MATH_DEFINES  "-I.\GeneratedFiles" "-I." "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtCore" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtGui" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtOpenGL" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtUiTools" "-ID:\Libraries\Qt\Qt5.8.0\5.8\msvc2015_64\include\QtWidgets" "-ID:\Libraries\Eigen\include\eigen3" "-ID:\Libraries\gflags-master\vc140\Include" "-ID:\Libraries\ANN\ann_vc140\include" "-ID:\Libraries\OpenMesh\OpenMesh 6.3\include" "-ID:\Libraries\freeglut\vc140\include" "-ID:\Libraries\Boost\vc140\include\boost-1_61" "-ID:\Libraries\Ipopt\Ipopt\vc140\include\coin" "-I.\..\MRFSolver\include" "-ID:\Libraries\Ipopt\Ipopt-master\Ipopt\src\Common"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="meshviewerwidget.qrc">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OcclusionRendering.frag" />
+    <None Include="OcclusionRendering.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="msvc2015_64" MocOptions="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
