@@ -1703,6 +1703,18 @@ int MeshCuboidStructure::num_all_cuboids()
 	return num_of_cuboids;
 }
 
+int MeshCuboidStructure::num_real_cuboids()
+{
+	int num_of_cuboids = 0;
+
+	for (std::vector<std::vector<MeshCuboid *>>::const_iterator it = label_cuboids_.begin();
+		it != label_cuboids_.end(); ++it)
+		if (!it->empty())
+			num_of_cuboids++;
+
+	return num_of_cuboids;
+}
+
 void MeshCuboidStructure::get_all_cuboid_surface_points(
 	std::vector<MeshCuboidSurfacePoint *> &all_cuboid_surface_points) const
 {

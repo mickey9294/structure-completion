@@ -94,7 +94,7 @@ void MeshViewerCore::reconstruct(
 	assert(ret);
 
 	set_modelview_matrix(_occlusion_modelview_matrix, false);
-	remove_occluded_points();
+	//remove_occluded_points();
 	set_modelview_matrix(_snapshot_modelview_matrix);
 
 	MeshCuboidStructure cuboid_structure_copy(cuboid_structure_);
@@ -1121,6 +1121,16 @@ void MeshViewerCore::reconstruct_database_prior(
 	else
 		cuboid_structure_.clear_sample_points();
 
+	/* Data structures for database reconstruction - by Cyun */
+	int num_real_cuboids = cuboid_structure_.num_real_cuboids();
+	std::vector<Eigen::MatrixXd> parts_vertices;
+	std::vector<Eigen::MatrixXi> parts_faces;
+	std::vector<MeshCuboid *> act_cuboids, pre_cuboids;
+	parts_vertices.reserve(num_real_cuboids);
+	parts_faces.reserve(num_real_cuboids);
+	act_cuboids.reserve(num_real_cuboids);
+
+
 	for (LabelIndex label_index = 0; label_index < num_labels; ++label_index)
 	{
 		// Reconstruct designated labels only if '_reconstructed_label_indices' is provided.
@@ -1169,6 +1179,14 @@ void MeshViewerCore::reconstruct_database_prior(
 		assert(cuboid);
 		assert(example_cuboid);
 
+		/* Get partly mesh of each part for database reconstruction */
+		act_cuboids.push_back(example_cuboid);
+		pre_cuboids.push_back(cuboid);
+		Eigen::MatrixXd part_vertices;
+		Eigen::MatrixXi part_faces;
+		get_part_mesh(mesh_name, mesh_filepath, label_index, part_vertices, part_faces);
+
+
 		const int num_points = example_cuboid->num_sample_points();
 		std::cout << "# of sample points: " << num_points << std::endl;
 		std::cout << "Copying... ";
@@ -1196,3 +1214,106 @@ void MeshViewerCore::reconstruct_database_prior(
 	}
 }
 
+//MyMesh::Point 与 Vec<3,float>的转换
+trimesh::Vec<3, float> MeshViewerCore::Point2point(MyMesh::Point a) {
+	trimesh::Vec<3, float> v;
+	v[0] = a[0];
+	v[1] = a[1];
+	v[2] = a[2];
+	return v;
+}
+
+void MeshViewerCore::database_fusion(std::vector<Eigen::MatrixXd> &parts_vertices, std::vector<Eigen::MatrixXi> &parts_faces,
+	std::vector<MeshCuboid *> &act_cuboids, std::vector<MeshCuboid *> &pre_cuboids, Eigen::MatrixXd &fused_vertices, 
+	Eigen::MatrixXi &fused_faces) {
+	//复制v和f
+	std::vector<Eigen::MatrixXd> pV;
+	std::vector<Eigen::MatrixXi> pF = parts_faces;
+
+
+	int partNum = parts_vertices.size();
+	//第i个部件的顶点变换
+	for (int i = 0; i < partNum; i++) {
+		//原包围盒信息
+		trimesh::Vec<3, float> ori_xAxis, ori_yAxis, ori_zAxis;
+		float ori_eX, ori_eY, ori_eZ;
+		trimesh::point oriCenter;
+
+		ori_xAxis = Point2point(act_cuboids[i]->get_bbox_axis(0));
+		ori_yAxis = Point2point(act_cuboids[i]->get_bbox_axis(1));
+		ori_zAxis = Point2point(act_cuboids[i]->get_bbox_axis(2));
+
+		MyMesh::Normal len = act_cuboids[i]->get_bbox_size();
+		ori_eX = len[0];
+		ori_eY = len[1];
+		ori_eZ = len[2];
+
+		oriCenter = Point2point(act_cuboids[i]->get_bbox_center());
+
+		//新包围盒信息
+		trimesh::Vec<3, float> new_xAxis, new_yAxis, new_zAxis;
+		float new_eX, new_eY, new_eZ;
+		trimesh::point newCenter;
+
+		new_xAxis = Point2point(pre_cuboids[i]->get_bbox_axis(0));
+		new_yAxis = Point2point(pre_cuboids[i]->get_bbox_axis(1));
+		new_zAxis = Point2point(pre_cuboids[i]->get_bbox_axis(2));
+
+		MyMesh::Normal newlen = pre_cuboids[i]->get_bbox_size();
+		new_eX = newlen[0];
+		new_eY = newlen[1];
+		new_eZ = newlen[2];
+
+		newCenter = Point2point(pre_cuboids[i]->get_bbox_center());
+
+		MeshRelation tempTrans;
+		Eigen::MatrixXd tempV = parts_vertices[i];
+		Eigen::MatrixXd newV = tempV;
+
+		for (int j = 0; j < parts_vertices[i].rows(); j++) {
+
+			//原坐标
+			trimesh::point oriPoint(tempV(j, 0), tempV(j, 1), tempV(j, 2));
+
+			//在局部坐标系（包围盒坐标系内的坐标）
+			trimesh::point newPoint = tempTrans.newCoordinate(oriPoint, ori_xAxis, ori_yAxis, ori_zAxis, ori_eX, ori_eY, ori_eZ, oriCenter);
+
+			//在新包围盒下的全局坐标系坐标
+			trimesh::point conPoint = tempTrans.oriCoordinate(newPoint, new_xAxis, new_yAxis, new_zAxis, new_eX, new_eY, new_eZ, newCenter);
+
+			//新坐标加入newV
+			newV(j, 0) = conPoint[0];
+			newV(j, 1) = conPoint[1];
+			newV(j, 2) = conPoint[2];
+		}
+
+		//newV 加入pV
+		pV.push_back(newV);
+	}
+
+	//融合pV,pF
+	int vCount = 0, fCount = 0, fSum = 0;
+
+	//顶点结果
+	for (int i = 0; i < partNum; i++) {
+		Eigen::MatrixXd tempV = pV[i];
+		for (int j = 0; j < tempV.rows(); j++) {
+			fused_vertices(vCount, 0) = tempV[j, 0];
+			fused_vertices(vCount, 1) = tempV[j, 1];
+			fused_vertices(vCount, 2) = tempV[j, 2];
+			vCount++;
+		}
+	}
+
+	//面片结果
+	for (int i = 0; i < partNum; i++) {
+		Eigen::MatrixXd tempF = pF[i];
+		for (int j = 0; j < tempF.rows(); j++) {
+			fused_faces(fCount, 0) = tempF[j, 0] + fSum;
+			fused_faces(fCount, 1) = tempF[j, 1] + fSum;
+			fused_faces(fCount, 2) = tempF[j, 2] + fSum;
+			fCount++;
+		}
+		fSum += tempF.rows();
+	}
+}

@@ -71,19 +71,19 @@ DEFINE_bool(optimize_individual_reflection_symmetry_group, true, "");
 DEFINE_string(mesh_filename, "104.off", "");
 DEFINE_string(data_root_path, "D:/Projects/shape2pose/", "");
 
-DEFINE_string(label_info_path, "data/0_body/assembly_airplanes/", "");
-DEFINE_string(mesh_path, "data/1_input/assembly_airplanes/off/", "");
-DEFINE_string(sample_path, "data/2_analysis/assembly_airplanes/points/even1000/", "");
-DEFINE_string(dense_sample_path, "data/2_analysis/assembly_airplanes/points/random100000/", "");
-DEFINE_string(mesh_label_path, "data/1_input/assembly_airplanes/gt/", "");
-DEFINE_string(sample_label_path, "data/4_experiments/exp1_assembly_airplanes/1_prediction/", "");
+DEFINE_string(label_info_path, "data/0_body/shapenet_chairs/", "");
+DEFINE_string(mesh_path, "data/1_input/shapenet_chairs/off/", "");
+DEFINE_string(sample_path, "data/2_analysis/shapenet_chairs/points/even1000/", "");
+DEFINE_string(dense_sample_path, "data/2_analysis/shapenet_chairs/points/random100000/", "");
+DEFINE_string(mesh_label_path, "data/1_input/shapenet_chairs/gt/", "");
+DEFINE_string(sample_label_path, "data/4_experiments/exp1_shapenet_chairs/1_prediction/", "");
 
-DEFINE_string(retrieval_label_info_path, "data/0_body/assembly_airplanes/", "");
-DEFINE_string(retrieval_mesh_path, "data/1_input/assembly_airplanes/off/", "");
-DEFINE_string(retrieval_sample_path, "data/2_analysis/assembly_airplanes/points/even1000/", "");
-DEFINE_string(retrieval_dense_sample_path, "data/2_analysis/assembly_airplanes/points/random100000/", "");
-DEFINE_string(retrieval_mesh_label_path, "data/1_input/assembly_airplanes/gt/", "");
-DEFINE_string(retrieval_sample_label_path, "data/4_experiments/exp1_assembly_airplanes/1_prediction/", "");
+DEFINE_string(retrieval_label_info_path, "data/0_body/shapenet_chairs/", "");
+DEFINE_string(retrieval_mesh_path, "data/1_input/shapenet_chairs/off/", "");
+DEFINE_string(retrieval_sample_path, "data/2_analysis/shapenet_chairs/points/even1000/", "");
+DEFINE_string(retrieval_dense_sample_path, "data/2_analysis/shapenet_chairs/points/random100000/", "");
+DEFINE_string(retrieval_mesh_label_path, "data/1_input/shapenet_chairs/gt/", "");
+DEFINE_string(retrieval_sample_label_path, "data/4_experiments/exp1_shapenet_chairs/1_prediction/", "");
 
 DEFINE_string(output_dir, "output", "");
 DEFINE_string(training_dir, "training", "");

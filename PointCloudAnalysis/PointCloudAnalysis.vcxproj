@@ -183,6 +183,7 @@
     <ClCompile Include="MeshCuboidStructure.cpp" />
     <ClCompile Include="MeshCuboidSymmetryGroup.cpp" />
     <ClCompile Include="MeshCuboidTrainer.cpp" />
+    <ClCompile Include="MeshRelation.cpp" />
     <ClCompile Include="MeshViewerCore.cpp" />
     <ClCompile Include="MeshViewerCoreT.cpp" />
     <ClCompile Include="meshviewerwidget.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="MeshCuboidStructure.h" />
     <ClInclude Include="MeshCuboidSymmetryGroup.h" />
     <ClInclude Include="MeshCuboidTrainer.h" />
+    <ClInclude Include="MeshRelation.h" />
     <ClInclude Include="MeshViewerCore.h" />
     <ClInclude Include="MeshViewerCoreT.h" />
     <ClInclude Include="MyMesh.h" />
@@ -266,6 +268,7 @@
     <ClInclude Include="simplerandom.h" />
     <ClInclude Include="SymmetryDetection.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vec.h" />
     <CustomBuild Include="QGLViewerWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QGLViewerWidget.h...</Message>

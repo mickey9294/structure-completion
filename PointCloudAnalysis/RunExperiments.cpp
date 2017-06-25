@@ -939,7 +939,7 @@ void MeshViewerCore::batch_predict()
 
 void MeshViewerCore::predict()
 {
-	FLAGS_no_evaluation = false;
+	FLAGS_no_evaluation = true;
 	// Load basic information.
 	bool ret = true;
 
@@ -1095,7 +1095,7 @@ void MeshViewerCore::predict()
 	}
 
 	//cuboid_structure_.save_sample_points("D:/Projects/Data/temp/sample_1.pts");
-	remove_occluded_points();
+	//remove_occluded_points();
 
 	std::cout << "modelview_mat before view snapshot:" << std::endl;
 	display_matrix(modelview_matrix());
@@ -1138,7 +1138,7 @@ void MeshViewerCore::predict()
 	std::cout << " - Remove occluded points." << std::endl;
 	set_modelview_matrix(occlusion_modelview_matrix, false);
 	//cuboid_structure_.save_sample_points("D:/Projects/Data/temp/sample_2.pts");
-	remove_occluded_points();
+	//remove_occluded_points();
 	set_modelview_matrix(snapshot_modelview_matrix);
 
 
@@ -1371,7 +1371,7 @@ void MeshViewerCore::predict()
 			snapshot_filename_sstr << mesh_output_path << filename_prefix << num_final_cuboid_structure_candidates;
 
 			draw_point_correspondences_ = false;
-			//FLAGS_no_evaluation = true;
+			
 			if (!FLAGS_no_evaluation) {
 				reconstruct(
 					mesh_filepath.c_str(),

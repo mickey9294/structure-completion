@@ -10,7 +10,11 @@
 #include "MeshCuboidPredictor.h"
 #include "MeshCuboidSymmetryGroup.h"
 #include "MeshCuboidTrainer.h"
+#include "MeshRelation.h"
+#include "Vec.h"
 
+#include <boost\algorithm\string.hpp>
+#include <unordered_map>
 
 //== DEFINES ==================================================================
 
@@ -170,6 +174,14 @@ private:
 	void compute_view_plane_mask_range(const Real _modelview_matrix[16]);
 
 	void display_matrix(const double matrix[16]);
+
+	bool get_part_mesh(const std::string &mesh_name, std::string &mesh_path, 
+		int label_index, Eigen::MatrixXd &vertices, Eigen::MatrixXi &faces);
+
+	trimesh::Vec<3, float> Point2point(MyMesh::Point a);
+
+	void database_fusion(std::vector<Eigen::MatrixXd> &parts_vertices, std::vector<Eigen::MatrixXi> &parts_faces,
+		std::vector<MeshCuboid *> &act_cuboids, std::vector<MeshCuboid *> &pre_cuboids, Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
 
 public:
 	virtual void mousePressEvent(const OpenMesh::Vec2f& _new_point_2d,

@@ -1607,3 +1607,113 @@ void MeshViewerCore::display_matrix(const double matrix[16])
 		std::cout << std::endl;
 	}
 }
+
+bool MeshViewerCore::get_part_mesh(const std::string & mesh_name, std::string & mesh_path, 
+	int label_index, Eigen::MatrixXd & vertices, Eigen::MatrixXi & faces)
+{
+	std::list<Eigen::Vector3d> part_verts;
+	std::list<Eigen::Vector3i> part_faces;
+	std::vector<int> face_labels;
+
+	std::string label_path = FLAGS_data_root_path + FLAGS_mesh_label_path + std::string("/") + mesh_name + std::string(".seg");
+	std::ifstream mesh_in(mesh_path.c_str());
+	std::ifstream label_in(label_path.c_str());
+
+	if (!mesh_in.is_open())
+	{
+		std::cerr << "Cannot open mesh file " << mesh_path << std::endl;
+		return false;
+	}
+	if (!label_in.is_open())
+	{
+		std::cerr << "Cannot open mesh label file " << label_path << std::endl;
+		return false;
+	}
+
+	std::string line;
+	std::vector<std::string> line_split;
+	
+	/* Read mesh file header */
+	std::getline(mesh_in, line);
+	std::getline(mesh_in, line);
+	boost::split(line_split, line, boost::is_any_of(" "), boost::token_compress_on);
+	int num_vertices = std::stoi(line_split[0]);
+	int num_faces = std::stoi(line_split[1]);
+
+	/* read face labels */
+	face_labels.resize(num_faces);
+	for (int i = 0; i < num_faces; i++)
+	{
+		std::getline(label_in, line);
+		face_labels[i] = std::stoi(line);
+	}
+
+	std::unordered_map<int, int> ori_curr_map;
+	std::vector<Eigen::Vector3d> ori_verts(num_vertices);
+	for (int i = 0; i < num_vertices; i++)
+	{
+		std::getline(mesh_in, line);
+		boost::split(line_split, line, boost::is_any_of(" "), boost::token_compress_on);
+		ori_verts[i][0] = std::stod(line_split[0]);
+		ori_verts[i][1] = std::stod(line_split[1]);
+		ori_verts[i][2] = std::stod(line_split[2]);
+	}
+	for (int i = 0; i < num_faces; i++)
+	{
+		std::getline(mesh_in, line);
+
+		int face_label = face_labels[i];
+		
+		if (face_label == label_index)
+		{
+			boost::split(line_split, line, boost::is_any_of(" "), boost::token_compress_on);
+			int v1 = std::stoi(line_split[1]);
+			int v2 = std::stoi(line_split[2]);
+			int v3 = std::stoi(line_split[3]);
+
+			Eigen::Vector3i face;
+			if (ori_curr_map.find(v1) != ori_curr_map.end())
+				face[0] = ori_curr_map[v1];
+			else
+			{
+				ori_curr_map[v1] = part_verts.size();
+				face[0] = part_verts.size();
+				part_verts.push_back(ori_verts[v1]);			
+			}
+
+			if (ori_curr_map.find(v2) != ori_curr_map.end())
+				face[1] = ori_curr_map[v2];
+			else
+			{
+				ori_curr_map[v2] = part_verts.size();
+				face[1] = part_verts.size();
+				part_verts.push_back(ori_verts[v2]);
+			}
+
+			if (ori_curr_map.find(v3) != ori_curr_map.end())
+				face[2] = ori_curr_map[v3];
+			else
+			{
+				ori_curr_map[v3] = part_verts.size();
+				face[2] = part_verts.size();
+				part_verts.push_back(ori_verts[v3]);
+			}
+
+			part_faces.push_back(face);
+		}
+	}
+
+	vertices.resize(part_verts.size(), 3);
+	faces.resize(part_faces.size(), 3);
+	int rowid = 0;
+	for (std::list<Eigen::Vector3d>::iterator it = part_verts.begin(); it != part_verts.end(); ++it, ++rowid)
+		vertices.row(rowid) = *it;
+	rowid = 0;
+	for (std::list<Eigen::Vector3i>::iterator it = part_faces.begin(); it != part_faces.end(); ++it, ++rowid)
+		faces.row(rowid) = *it;
+
+	mesh_in.close();
+	label_in.close();
+}
+
+

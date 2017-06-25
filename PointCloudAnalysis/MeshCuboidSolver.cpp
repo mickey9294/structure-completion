@@ -1942,7 +1942,7 @@ bool add_missing_cuboids(
 
 			bool is_occluded = (symmetric_label_index >= num_labels || !is_given_label_indices[symmetric_label_index])
 					&& (overall_visibility > FLAGS_param_min_cuboid_overall_visibility);
-			
+			is_occluded = false;
 			if (is_occluded)
 			{
 				// The cuboid is placed in the visible area.

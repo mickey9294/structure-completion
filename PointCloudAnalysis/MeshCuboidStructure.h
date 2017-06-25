@@ -86,6 +86,7 @@ public:
 	std::vector<MeshCuboid *> get_all_cuboids() const;
 
 	int num_all_cuboids();
+	int num_real_cuboids();
 
 	void get_all_cuboid_surface_points(
 		std::vector<MeshCuboidSurfacePoint *> &all_cuboid_surface_points) const;
