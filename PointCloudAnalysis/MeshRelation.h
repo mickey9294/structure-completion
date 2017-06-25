@@ -13,7 +13,7 @@ public:
 	MeshRelation();
 	~MeshRelation();
 
-	MeshRelation(MyMesh m1,MyMesh m2);// m1 rotate to m2
+	//MeshRelation(MyMesh m1,MyMesh m2);// m1 rotate to m2
 
 	void computeRotateMartix(Eigen::Vector3d &sourceV, Eigen::Vector3d &destV, Eigen::Matrix3d &M);
 

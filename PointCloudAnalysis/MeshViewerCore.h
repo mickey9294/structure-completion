@@ -181,7 +181,10 @@ private:
 	trimesh::Vec<3, float> Point2point(MyMesh::Point a);
 
 	void database_fusion(std::vector<Eigen::MatrixXd> &parts_vertices, std::vector<Eigen::MatrixXi> &parts_faces,
-		std::vector<MeshCuboid *> &act_cuboids, std::vector<MeshCuboid *> &pre_cuboids, Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
+		std::vector<MeshCuboid *> &act_cuboids, std::vector<MeshCuboid *> &pre_cuboids, 
+		Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
+
+	bool save_fused_mesh(const std::string &out_path, Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
 
 public:
 	virtual void mousePressEvent(const OpenMesh::Vec2f& _new_point_2d,

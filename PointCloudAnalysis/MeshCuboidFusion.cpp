@@ -635,6 +635,7 @@ void fusing_single_symmetry_cuboid(LabelIndex _label_index,
 	const Real occlusion_radius = FLAGS_param_fusion_grid_size;
 	const Real visibility_smoothing_prior = FLAGS_param_fusion_visibility_smoothing_prior;
 
+	/* Get cuboids of particular part label from different reconstruction cuboid structures */
 	MeshCuboid *symmetry_cuboid = NULL, *database_cuboid = NULL, *output_cuboid = NULL;
 	bool ret = get_fusion_cuboids(_label_index,
 		_symmetry_cuboid_structure, _database_cuboid_structure, _output_cuboid_structure,
@@ -652,13 +653,14 @@ void fusing_single_symmetry_cuboid(LabelIndex _label_index,
 		return;
 	}
 
-	_is_label_index_visited[_label_index] = true;
+	_is_label_index_visited[_label_index] = true;  /* Mark the current part label visited */
 	std::cout << "Single symmetry: (" << _label_index << ")" << std::endl;
 
 	// Mark visited symmetry sample points.
 	mark_cuboid_sample_points(symmetry_cuboid, _symmetry_cuboid_structure, _is_symmetry_point_visited);
 
 	// Define local coordinates voxel grid.
+	/* Find a overall bounding box of both symmetry_cuboid and database_cuboid */
 	MyMesh::Point bbox_min, bbox_max;
 	create_voxel_grid(symmetry_cuboid, database_cuboid, bbox_min, bbox_max);
 	MeshCuboidVoxelGrid voxels(bbox_min, bbox_max, occlusion_radius);
@@ -831,6 +833,7 @@ void reconstruct_fusion(const char *_mesh_filepath,
 	memset(is_label_index_visited, false, _symmetry_cuboid_structure.num_labels() * sizeof(bool));
 
 
+	/* For each reflection symmetry group */
 	for (std::vector< MeshCuboidReflectionSymmetryGroup* >::const_iterator it = _symmetry_cuboid_structure.reflection_symmetry_groups_.begin();
 		it != _symmetry_cuboid_structure.reflection_symmetry_groups_.end(); ++it)
 	{

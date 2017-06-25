@@ -1179,12 +1179,16 @@ void MeshViewerCore::reconstruct_database_prior(
 		assert(cuboid);
 		assert(example_cuboid);
 
+
 		/* Get partly mesh of each part for database reconstruction */
 		act_cuboids.push_back(example_cuboid);
 		pre_cuboids.push_back(cuboid);
 		Eigen::MatrixXd part_vertices;
 		Eigen::MatrixXi part_faces;
 		get_part_mesh(mesh_name, mesh_filepath, label_index, part_vertices, part_faces);
+		parts_vertices.push_back(part_vertices);
+		parts_faces.push_back(part_faces);
+		std::string part_out_path = "part_" + std::to_string(label_index) + ".off";
 
 
 		const int num_points = example_cuboid->num_sample_points();
@@ -1212,6 +1216,13 @@ void MeshViewerCore::reconstruct_database_prior(
 
 		std::cout << "Done." << std::endl;
 	}
+
+
+	/* Fuse all parts and save to file */
+	Eigen::MatrixXd fused_vertices;
+	Eigen::MatrixXi fused_faces;
+	database_fusion(parts_vertices, parts_faces, act_cuboids, pre_cuboids, fused_vertices, fused_faces);
+	save_fused_mesh("fusion.off", fused_vertices, fused_faces);
 }
 
 //MyMesh::Point 与 Vec<3,float>的转换
@@ -1228,8 +1239,9 @@ void MeshViewerCore::database_fusion(std::vector<Eigen::MatrixXd> &parts_vertice
 	Eigen::MatrixXi &fused_faces) {
 	//复制v和f
 	std::vector<Eigen::MatrixXd> pV;
-	std::vector<Eigen::MatrixXi> pF = parts_faces;
+	std::vector<Eigen::MatrixXi> &pF = parts_faces;
 
+	int num_vertices = 0, num_faces = 0;
 
 	int partNum = parts_vertices.size();
 	//第i个部件的顶点变换
@@ -1276,10 +1288,14 @@ void MeshViewerCore::database_fusion(std::vector<Eigen::MatrixXd> &parts_vertice
 			trimesh::point oriPoint(tempV(j, 0), tempV(j, 1), tempV(j, 2));
 
 			//在局部坐标系（包围盒坐标系内的坐标）
-			trimesh::point newPoint = tempTrans.newCoordinate(oriPoint, ori_xAxis, ori_yAxis, ori_zAxis, ori_eX, ori_eY, ori_eZ, oriCenter);
+			trimesh::point newPoint = tempTrans.newCoordinate(oriPoint, ori_xAxis, ori_yAxis, 
+				ori_zAxis, ori_eX, ori_eY, ori_eZ, oriCenter);
 
 			//在新包围盒下的全局坐标系坐标
-			trimesh::point conPoint = tempTrans.oriCoordinate(newPoint, new_xAxis, new_yAxis, new_zAxis, new_eX, new_eY, new_eZ, newCenter);
+			trimesh::point conPoint = tempTrans.oriCoordinate(newPoint, new_xAxis, new_yAxis, 
+				new_zAxis, new_eX, new_eY, new_eZ, newCenter);
+
+			num_vertices++;
 
 			//新坐标加入newV
 			newV(j, 0) = conPoint[0];
@@ -1294,26 +1310,62 @@ void MeshViewerCore::database_fusion(std::vector<Eigen::MatrixXd> &parts_vertice
 	//融合pV,pF
 	int vCount = 0, fCount = 0, fSum = 0;
 
+	fused_vertices.resize(num_vertices, 3);
+
 	//顶点结果
 	for (int i = 0; i < partNum; i++) {
 		Eigen::MatrixXd tempV = pV[i];
 		for (int j = 0; j < tempV.rows(); j++) {
-			fused_vertices(vCount, 0) = tempV[j, 0];
-			fused_vertices(vCount, 1) = tempV[j, 1];
-			fused_vertices(vCount, 2) = tempV[j, 2];
+			fused_vertices(vCount, 0) = tempV(j, 0);
+			fused_vertices(vCount, 1) = tempV(j, 1);
+			fused_vertices(vCount, 2) = tempV(j, 2);
 			vCount++;
 		}
 	}
 
+	for (int i = 0; i < parts_faces.size(); i++)
+		num_faces += parts_faces[i].rows();
+	fused_faces.resize(num_faces, 3);
+
 	//面片结果
 	for (int i = 0; i < partNum; i++) {
-		Eigen::MatrixXd tempF = pF[i];
+		Eigen::MatrixXi tempF = pF[i];
 		for (int j = 0; j < tempF.rows(); j++) {
-			fused_faces(fCount, 0) = tempF[j, 0] + fSum;
-			fused_faces(fCount, 1) = tempF[j, 1] + fSum;
-			fused_faces(fCount, 2) = tempF[j, 2] + fSum;
+			fused_faces(fCount, 0) = tempF(j, 0) + fSum;
+			fused_faces(fCount, 1) = tempF(j, 1) + fSum;
+			fused_faces(fCount, 2) = tempF(j, 2) + fSum;
 			fCount++;
 		}
 		fSum += tempF.rows();
 	}
+}
+
+bool MeshViewerCore::save_fused_mesh(const std::string &out_path, Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces)
+{
+	std::ofstream out(out_path.c_str());
+	if (!out.is_open())
+	{
+		std::cerr << "Cannot open output mesh file." << std::endl;
+		return false;
+	}
+
+	out << "OFF" << std::endl;
+	out << fused_vertices.rows() << " " << fused_faces.rows() << " 0" << std::endl;
+	for (int i = 0; i < fused_vertices.rows(); i++)
+	{
+		out << fused_vertices(i, 0) << " "
+			<< fused_vertices(i, 1) << " "
+			<< fused_vertices(i, 2) << std::endl;
+	}
+
+	for (int i = 0; i < fused_faces.rows(); i++)
+	{
+		out << "3 " << fused_faces(i, 0) << " "
+			<< fused_faces(i, 1) << " "
+			<< fused_faces(i, 2) << std::endl;
+	}
+
+	out.close();
+
+	return true;
 }

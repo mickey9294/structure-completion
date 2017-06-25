@@ -1714,6 +1714,8 @@ bool MeshViewerCore::get_part_mesh(const std::string & mesh_name, std::string & 
 
 	mesh_in.close();
 	label_in.close();
+
+	return true;
 }
 
 
