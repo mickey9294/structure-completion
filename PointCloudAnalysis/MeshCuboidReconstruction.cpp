@@ -1129,7 +1129,8 @@ void MeshViewerCore::reconstruct_database_prior(
 	parts_vertices.reserve(num_real_cuboids);
 	parts_faces.reserve(num_real_cuboids);
 	act_cuboids.reserve(num_real_cuboids);
-
+	std::vector<std::string> part_example_paths;
+	part_example_paths.reserve(num_real_cuboids);
 
 	for (LabelIndex label_index = 0; label_index < num_labels; ++label_index)
 	{
@@ -1158,6 +1159,8 @@ void MeshViewerCore::reconstruct_database_prior(
 		std::string mesh_name(file_info.baseName().toLocal8Bit());
 		std::string cuboid_filepath = FLAGS_training_dir + std::string("/") + mesh_name + std::string(".arff");
 
+		part_example_paths.push_back(cuboid_filepath);
+
 		std::cout << "--------" << std::endl;
 		std::cout << "Label (" << label_index << "):" << std::endl;
 		std::cout << "Mesh name: " << mesh_name << std::endl;
@@ -1181,8 +1184,8 @@ void MeshViewerCore::reconstruct_database_prior(
 
 
 		/* Get partly mesh of each part for database reconstruction */
-		act_cuboids.push_back(example_cuboid);
-		pre_cuboids.push_back(cuboid);
+		act_cuboids.push_back(new MeshCuboid(*example_cuboid));
+		pre_cuboids.push_back(new MeshCuboid(*cuboid));
 		Eigen::MatrixXd part_vertices;
 		Eigen::MatrixXi part_faces;
 		get_part_mesh(mesh_name, mesh_filepath, label_index, part_vertices, part_faces);
@@ -1222,7 +1225,21 @@ void MeshViewerCore::reconstruct_database_prior(
 	Eigen::MatrixXd fused_vertices;
 	Eigen::MatrixXi fused_faces;
 	database_fusion(parts_vertices, parts_faces, act_cuboids, pre_cuboids, fused_vertices, fused_faces);
-	save_fused_mesh("fusion.off", fused_vertices, fused_faces);
+	std::string output_dir = FLAGS_output_dir + "/" + mesh_name;
+	std::string output_path = output_dir + "/fusion.off";
+	save_fused_mesh(output_path, fused_vertices, fused_faces);
+	//shape_fill_hole("fusion.off", "fusion_no_hole.off");
+	std::string examples_path = output_dir + "/part_examples_paths.txt";
+	std::ofstream examples_out(examples_path.c_str());
+	for (int i = 0; i < part_example_paths.size(); i++)
+		examples_out << part_example_paths[i] << std::endl;
+	examples_out << std::endl;
+
+	for (int i = 0; i < act_cuboids.size(); i++)
+	{
+		delete(act_cuboids[i]);
+	}
+	act_cuboids.clear();
 }
 
 //MyMesh::Point Óë Vec<3,float>µÄ×ª»»
@@ -1336,7 +1353,9 @@ void MeshViewerCore::database_fusion(std::vector<Eigen::MatrixXd> &parts_vertice
 			fused_faces(fCount, 2) = tempF(j, 2) + fSum;
 			fCount++;
 		}
-		fSum += tempF.rows();
+
+		//fSum += tempF.rows();
+		fSum += pV[i].rows();
 	}
 }
 
@@ -1369,3 +1388,52 @@ bool MeshViewerCore::save_fused_mesh(const std::string &out_path, Eigen::MatrixX
 
 	return true;
 }
+
+//typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+//typedef CGAL::Polyhedron_3<Kernel>     Polyhedron;
+//typedef Polyhedron::Halfedge_handle    Halfedge_handle;
+//typedef Polyhedron::Facet_handle       Facet_handle;
+//typedef Polyhedron::Vertex_handle      Vertex_handle;
+
+//bool MeshViewerCore::shape_fill_hole(const std::string & input_file, const std::string & output_file)
+//{
+//	std::ifstream input(input_file.c_str());
+//
+//	Polyhedron poly;
+//	if (!input || !(input >> poly) || poly.empty()) {
+//		std::cerr << "Not a valid off file." << std::endl;
+//		return false;
+//	}
+//
+//	// Incrementally fill the holes
+//	unsigned int nb_holes = 0;
+//	BOOST_FOREACH(Halfedge_handle h, halfedges(poly))
+//	{
+//		if (h->is_border())
+//		{
+//			std::vector<Facet_handle>  patch_facets;
+//			std::vector<Vertex_handle> patch_vertices;
+//			bool success = CGAL::cpp11::get<0>(
+//				CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole(
+//					poly,
+//					h,
+//					std::back_inserter(patch_facets),
+//					std::back_inserter(patch_vertices),
+//					CGAL::Polygon_mesh_processing::parameters::vertex_point_map(get(CGAL::vertex_point, poly)).
+//					geom_traits(Kernel())));
+//			std::cout << " Number of facets in constructed patch: " << patch_facets.size() << std::endl;
+//			std::cout << " Number of vertices in constructed patch: " << patch_vertices.size() << std::endl;
+//			std::cout << " Fairing : " << (success ? "succeeded" : "failed") << std::endl;
+//			++nb_holes;
+//		}
+//	}
+//	std::cout << std::endl;
+//	std::cout << nb_holes << " holes have been filled" << std::endl;
+//
+//	std::ofstream out(output_file.c_str());
+//	out.precision(17);
+//	out << poly << std::endl;
+//	out.close();
+//
+//	return true;
+//}

@@ -1220,15 +1220,15 @@ void MeshViewerCore::predict()
 		++snapshot_index;
 
 		/* Show the number of sample points corresponding to each cuboid */
-		std::vector<MeshCuboid *> cuboids_vec = cuboid_structure_.get_all_cuboids();
-		for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
-		{
-			int num_sample_points = (*cub_it)->num_sample_points();
-			int label = (*cub_it)->get_label_index();
+		//std::vector<MeshCuboid *> cuboids_vec = cuboid_structure_.get_all_cuboids();
+		//for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
+		//{
+		//	int num_sample_points = (*cub_it)->num_sample_points();
+		//	int label = (*cub_it)->get_label_index();
 
-			std::cout << "After parts labels & orientation prediciton of round_" << round << "," << std::endl;
-			std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
-		}
+		//	std::cout << "After parts labels & orientation prediciton of round_" << round << "," << std::endl;
+		//	std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
+		//}
 
 		//std::cout << "After recognition, # of samples = " << cuboid_structure_.num_sample_points() << std::endl;
 
@@ -1250,14 +1250,14 @@ void MeshViewerCore::predict()
 		snapshot(snapshot_filename_sstr.str().c_str());
 		++snapshot_index;
 
-		for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
-		{
-			int num_sample_points = (*cub_it)->num_sample_points();
-			int label = (*cub_it)->get_label_index();
+		//for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
+		//{
+		//	int num_sample_points = (*cub_it)->num_sample_points();
+		//	int label = (*cub_it)->get_label_index();
 
-			std::cout << "After point segmentation of round_" << round << "," << std::endl;
-			std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
-		}
+		//	std::cout << "After point segmentation of round_" << round << "," << std::endl;
+		//	std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
+		//}
 
 		//std::cout << "After segmentation, # of samples = " << cuboid_structure_.num_sample_points() << std::endl;
 
@@ -1292,14 +1292,14 @@ void MeshViewerCore::predict()
 			snapshot(snapshot_filename_sstr.str().c_str());
 			++snapshot_index;
 
-			for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
-			{
-				int num_sample_points = (*cub_it)->num_sample_points();
-				int label = (*cub_it)->get_label_index();
+			//for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
+			//{
+			//	int num_sample_points = (*cub_it)->num_sample_points();
+			//	int label = (*cub_it)->get_label_index();
 
-				std::cout << "After ckuboid attributes optimization of round_" << round << "," << std::endl;
-				std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
-			}
+			//	std::cout << "After ckuboid attributes optimization of round_" << round << "," << std::endl;
+			//	std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
+			//}
 
 			//std::cout << "After optimization, # of samples = " << cuboid_structure_.num_sample_points() << std::endl;
 
@@ -1334,8 +1334,6 @@ void MeshViewerCore::predict()
 					//ret = add_missing_cuboids(new_cuboid_structure, occlusion_modelview_matrix,
 					//	missing_label_indices, joint_normal_relations, ignored_label_indices);
 
-					std::cout << "6" << std::endl;
-
 					if (!ret)
 					{
 						is_cuboid_added = false;
@@ -1352,14 +1350,14 @@ void MeshViewerCore::predict()
 			}
 		}
 
-		for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
-		{
-			int num_sample_points = (*cub_it)->num_sample_points();
-			int label = (*cub_it)->get_label_index();
+		//for (std::vector<MeshCuboid *>::iterator cub_it = cuboids_vec.begin(); cub_it != cuboids_vec.end(); ++cub_it)
+		//{
+		//	int num_sample_points = (*cub_it)->num_sample_points();
+		//	int label = (*cub_it)->get_label_index();
 
-			std::cout << "After adding missing parts of round_" << round << "," << std::endl;
-			std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
-		}
+		//	std::cout << "After adding missing parts of round_" << round << "," << std::endl;
+		//	std::cout << "Cuboid_" << label << " has " << num_sample_points << " sample points." << std::endl;
+		//}
 
 		//std::cout << "After adding missing parts, # of samples = " << cuboid_structure_.num_sample_points() << std::endl;
 
@@ -1407,7 +1405,11 @@ void MeshViewerCore::predict()
 	}
 
 	/* Output the symmetry information */
-	std::string sym_output_path = FLAGS_symmetry_detection_dir + "/" + mesh_name + "/" + mesh_name + "_symmetry_info.txt";
+	std::string sym_output_dir = FLAGS_symmetry_detection_dir + "/" + mesh_name;
+	boost::filesystem::path boost_sym_dir(sym_output_dir);
+	if (!boost::filesystem::exists(boost_sym_dir))
+		boost::filesystem::create_directories(boost_sym_dir);
+	std::string sym_output_path = sym_output_dir + "/" + mesh_name + "_symmetry_info.txt";
 	cuboid_structure_.save_symmetry_groups(sym_output_path);
 
 	updateGL();

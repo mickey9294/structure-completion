@@ -264,9 +264,9 @@ Eigen::VectorXd solve_quadratic_programming(
 	Eigen::MatrixXd G = _quadratic_term;
 	Eigen::VectorXd g0 = _linear_term;
 	Eigen::MatrixXd CE(n, 0);
-	Eigen::VectorXd ce0(0.0);
+	Eigen::VectorXd ce0(0);
 	Eigen::MatrixXd CI(n, 0);
-	Eigen::VectorXd ci0(0.0);
+	Eigen::VectorXd ci0(0);
 
 	std::cout << "Energy: (";
 

@@ -1645,6 +1645,7 @@ bool MeshViewerCore::get_part_mesh(const std::string & mesh_name, std::string & 
 	for (int i = 0; i < num_faces; i++)
 	{
 		std::getline(label_in, line);
+		
 		face_labels[i] = std::stoi(line);
 	}
 

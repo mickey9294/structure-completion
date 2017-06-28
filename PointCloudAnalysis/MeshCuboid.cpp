@@ -1016,6 +1016,14 @@ void MeshCuboid::compute_cuboid_surface_point_visibility(
 		Eigen::Vector4d surface_point_4;
 		surface_point_4 << surface_point, 1.0;
 
+		std::ofstream checkout;
+		if (test_point_index == 0)
+		{
+			checkout.open("check.off");
+			checkout << "OFF" << std::endl;
+			checkout << _given_sample_points.size() << " 0 0" << std::endl;
+		}
+
 		for (std::vector<MeshSamplePoint *>::const_iterator jt = _given_sample_points.begin();
 			jt != _given_sample_points.end(); jt++)
 		{
@@ -1030,6 +1038,11 @@ void MeshCuboid::compute_cuboid_surface_point_visibility(
 			Eigen::Vector4d lc_observed_point_4 = modelview_matrix * observed_point_4;
 			Eigen::Vector3d lc_observed_point = lc_observed_point_4.topRows(3) / lc_observed_point_4[3];
 			lc_observed_point[2] -= _radius;
+
+			//if (checkout.is_open())
+			//{
+			//	checkout << lc_observed_point[0] << " " << lc_observed_point[1] << " " << lc_observed_point[2] << std::endl;
+			//}
 
 			Eigen::Vector4d lc_surface_point_4 = modelview_matrix * surface_point_4;
 			Eigen::Vector3d lc_surface_point = lc_surface_point_4.topRows(3) / lc_surface_point_4[3];
@@ -1047,10 +1060,10 @@ void MeshCuboid::compute_cuboid_surface_point_visibility(
 				continue;
 
 			Real cos_angle = dot_prod / (lc_surface_point_len * lc_observed_point_len);
-			if (std::acos(cos_angle) <= std::atan(_radius / lc_observed_point_len))
-			{
-				visibility = 0;
-			}
+			//if (std::acos(cos_angle) <= std::atan(_radius / lc_observed_point_len))
+			//{
+			//	visibility = 0;
+			//}
 
 			//Real cos_angle = dot_prod / (lc_surface_point_len * lc_observed_point_len);
 			//Real sin_angle = std::sqrt(1 - cos_angle * cos_angle);
@@ -1072,6 +1085,9 @@ void MeshCuboid::compute_cuboid_surface_point_visibility(
 			//	if (distance < 1) visibility = 0;
 			//}
 		}
+
+		/*if (checkout.is_open())
+			checkout.close();*/
 
 		assert(visibility >= 0.0);
 		assert(visibility <= 1.0);

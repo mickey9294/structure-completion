@@ -14,7 +14,16 @@
 #include "Vec.h"
 
 #include <boost\algorithm\string.hpp>
+#include <boost\filesystem.hpp>
+#include <boost\foreach.hpp>
 #include <unordered_map>
+
+//#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+//#include <CGAL/Polyhedron_3.h>
+//#include <CGAL/IO/Polyhedron_iostream.h>
+//#include <CGAL/boost/graph/graph_traits_Polyhedron_3.h>
+//#include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
+
 
 //== DEFINES ==================================================================
 
@@ -185,6 +194,8 @@ private:
 		Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
 
 	bool save_fused_mesh(const std::string &out_path, Eigen::MatrixXd &fused_vertices, Eigen::MatrixXi &fused_faces);
+
+	//bool shape_fill_hole(const std::string &input_file, const std::string &output_file);
 
 public:
 	virtual void mousePressEvent(const OpenMesh::Vec2f& _new_point_2d,

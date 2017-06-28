@@ -845,7 +845,7 @@ bool MeshCuboidStructure::load_sample_points(const char *_filename, bool _verbos
 				sample_points_.push_back(sample_point);
 				assert(sample_points_[sample_point_index] == sample_point);
 			}
-			else if (line_split.size() == 7)
+			else //if (line_split.size() == 7)
 			{
 				FaceIndex corr_fid = std::stoi(line_split[0]);
 				float bx = std::stof(line_split[1]);
